@@ -2,10 +2,7 @@
   "name": "Kotlin Interview",
   "image": "mcr.microsoft.com/devcontainers/java:17",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/gradle:1": {
-      "version": "latest"
-    }
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "onCreateCommand": "bash .devcontainer/download-kotlin-lsp.sh",
   "postCreateCommand": "chmod +x ./gradlew && ./gradlew build --no-daemon",
