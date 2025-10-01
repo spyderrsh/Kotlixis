@@ -2,14 +2,30 @@
   "name": "Kotlin Interview",
   "image": "mcr.microsoft.com/devcontainers/java:17",            // ensures Java 17+
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}           // we'll use gh to fetch the VSIX
+    "ghcr.io/devcontainers/features/github-cli:1": {},           // we'll use gh to fetch the VSIX
+    "ghcr.io/devcontainers/features/gradle:1": {
+      "version": "latest"
+    }
   },
-  "postCreateCommand": "bash .devcontainer/setup-kotlin-lsp.sh",
+  "onCreateCommand": "bash .devcontainer/download-kotlin-lsp.sh",
+  "postCreateCommand": "chmod +x ./gradlew && ./gradlew build --no-daemon",
+  "postStartCommand": "bash .devcontainer/install-kotlin-lsp.sh",
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vsliveshare.vsliveshare"                             // optional: Live Share for pairing
-      ]
+        "ms-vsliveshare.vsliveshare",                             // optional: Live Share for pairing
+        "vscjava.vscode-gradle"                                   // Gradle task support
+      ],
+      "settings": {
+        "gradle.nestedProjects": true,
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "files.exclude": {
+          "**/.gradle": true,
+          "**/.idea": true,
+          "**/build": true,
+          "**/.kotlin": true
+        }
+      }
     }
   },
   "forwardPorts": []
