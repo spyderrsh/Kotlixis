@@ -1,0 +1,17 @@
+{
+  "kotlin.languageServer.enabled": true,
+  "kotlin.compiler.jvm.target": "11",
+  "kotlin.debounceTime": 250,
+  "gradle.nestedProjects": true,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "files.exclude": {
+    "**/.gradle": true,
+    "**/.idea": true,
+    "**/build": true,
+    "**/.kotlin": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/.gradle": true
+  }
+}

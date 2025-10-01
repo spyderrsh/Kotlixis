@@ -1,12 +1,16 @@
 {
-  "name": "Interview Environment",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
-  "features": { "ghcr.io/devcontainers/features/git:1": {} },
-  "postCreateCommand": "npm ci",
-  "forwardPorts": [3000],
+  "name": "Kotlin Interview",
+  "image": "mcr.microsoft.com/devcontainers/java:17",            // ensures Java 17+
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}           // we'll use gh to fetch the VSIX
+  },
+  "postCreateCommand": "bash .devcontainer/setup-kotlin-lsp.sh",
   "customizations": {
     "vscode": {
-      "extensions": ["dbaeumer.vscode-eslint", "ms-vsliveshare.vsliveshare"]
+      "extensions": [
+        "ms-vsliveshare.vsliveshare"                             // optional: Live Share for pairing
+      ]
     }
-  }
+  },
+  "forwardPorts": []
 }

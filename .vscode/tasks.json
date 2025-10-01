@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Gradle: Build",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": ["build", "--no-daemon"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Gradle: Test",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": ["test", "--no-daemon"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Gradle: Clean Build",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": ["clean", "build", "--no-daemon"],
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Gradle: Test (with reports)",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": ["test", "--no-daemon", "--info"],
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}
