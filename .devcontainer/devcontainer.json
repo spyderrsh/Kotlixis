@@ -1,8 +1,8 @@
 {
   "name": "Kotlin Interview",
-  "image": "mcr.microsoft.com/devcontainers/java:17",            // ensures Java 17+
+  "image": "mcr.microsoft.com/devcontainers/java:17",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {},           // we'll use gh to fetch the VSIX
+    "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/gradle:1": {
       "version": "latest"
     }
@@ -13,8 +13,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-vsliveshare.vsliveshare",                             // optional: Live Share for pairing
-        "vscjava.vscode-gradle"                                   // Gradle task support
+        "ms-vsliveshare.vsliveshare",
+        "vscjava.vscode-gradle"
       ],
       "settings": {
         "gradle.nestedProjects": true,
