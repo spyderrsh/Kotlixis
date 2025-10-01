@@ -211,6 +211,23 @@ class TestSuite() {
         assertEquals(-1, smallest)
     }
 
+    @Test
+    fun test12() {
+        val tree = Group {
+            1()
+            2()
+            Group {
+                1()
+                1()
+                2()
+                0()
+            }
+            Group { }
+        }
+        val smallest = smallestLeaf(rootNode = tree)
+        assertEquals(0, smallest)
+    }
+
     // DSL Builder for creating groups with a tree-like syntax
     class GroupBuilder {
         internal val children = mutableListOf<Node>()

@@ -1,19 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Fetch latest Kotlin VS Code extension (VSIX) from GitHub Releases
-# Requires: gh (installed via devcontainer feature)
-WORKDIR="${TMPDIR:-/tmp}/kotlin-lsp"
-mkdir -p "$WORKDIR"
-pushd "$WORKDIR" >/dev/null
+# Requirements: curl, grep, sed (present in Codespaces images); VS Code CLI `code` is available in Codespaces
+# Kotlin LSP requires Java 17+ (we'll rely on the devcontainer image for that).
 
-# Download only the VSIX asset from Kotlin/kotlin-lsp latest release
-gh release download -R Kotlin/kotlin-lsp --pattern "*.vsix" --clobber
+RELEASES_URL="https://github.com/Kotlin/kotlin-lsp/releases/latest"
 
-# There should be exactly one .vsix; install it into the Codespace VS Code server
-VSIX="$(ls *.vsix | head -n1)"
-echo "Installing Kotlin LSP VSIX: $VSIX"
-code --install-extension "$VSIX" --force
+echo "Resolving latest Kotlin LSP VSIX URL from ${RELEASES_URL} ..."
+# Parse the latest release HTML for the JetBrains CDN VSIX link
+VSIX_URL="$(curl -fsSL "$RELEASES_URL" \
+  | grep -Eo 'https://download-cdn\.jetbrains\.com/[^"]+\.vsix' \
+  | head -n1)"
 
-popd >/dev/null
-echo "Kotlin LSP installed."
+if [[ -z "${VSIX_URL}" ]]; then
+  echo "Could not find a VSIX link on the Releases page."
+  echo "As a fallback, consider installing the (deprecated) fwcd.kotlin extension from Marketplace."
+  exit 1
+fi
+
+echo "Downloading VSIX: ${VSIX_URL}"
+TMP_DIR="$(mktemp -d)"
+VSIX_PATH="${TMP_DIR}/kotlin-lsp.vsix"
+curl -fL "${VSIX_URL}" -o "${VSIX_PATH}"
+
+echo "Installing VSIX into Codespaces..."
+code --install-extension "${VSIX_PATH}" --force
+
+echo "Kotlin LSP installed. Opening a JVM Gradle Kotlin project will activate it."
