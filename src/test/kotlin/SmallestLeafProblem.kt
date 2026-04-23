@@ -58,6 +58,10 @@ fun smallestLeaf(rootNode: Node): Int {
 class TestSuite() {
     @Test
     fun test01() {
+        /*
+         * *
+         * └── (empty)
+         */
         val tree = Group { }
         val smallest = smallestLeaf(rootNode = tree)
         assertEquals(-1, smallest)
@@ -65,6 +69,9 @@ class TestSuite() {
 
     @Test
     fun test02() {
+        /*
+         * 1
+         */
         val tree = Leaf(value = 1)
         val smallest = smallestLeaf(rootNode = tree)
         assertEquals(1, smallest)
@@ -72,6 +79,12 @@ class TestSuite() {
 
     @Test
     fun test03() {
+        /*
+         * *
+         * ├── 1
+         * ├── 2
+         * └── 3
+         */
         val tree = Group {
             1()
             2()
@@ -83,6 +96,15 @@ class TestSuite() {
 
     @Test
     fun test04() {
+        /*
+         * *
+         * ├── *
+         * │   ├── 1
+         * │   └── *
+         * │       ├── 2
+         * │       └── 1
+         * └── 3
+         */
         val tree = Group {
             Group {
                 1()
@@ -99,6 +121,14 @@ class TestSuite() {
 
     @Test
     fun test05() {
+        /*
+         * *
+         * └── *
+         *     ├── 1
+         *     └── *
+         *         ├── 1
+         *         └── 1
+         */
         val tree = Group {
             Group {
                 1()
@@ -114,6 +144,15 @@ class TestSuite() {
 
     @Test
     fun test06() {
+        /*
+         * *
+         * ├── *
+         * │   └── 3
+         * ├── *
+         * │   └── 2
+         * └── *
+         *     └── 1
+         */
         val tree = Group {
             Group {
                 3()
@@ -131,6 +170,16 @@ class TestSuite() {
 
     @Test
     fun test07() {
+        /*
+         * *
+         * ├── 9
+         * ├── *
+         * │   ├── 2
+         * │   ├── 3
+         * │   ├── 4
+         * │   └── 5
+         * └── 6
+         */
         val tree = Group {
             9()
             Group {
@@ -147,6 +196,16 @@ class TestSuite() {
 
     @Test
     fun test08() {
+        /*
+         * *
+         * ├── 55
+         * ├── *
+         * │   ├── 22
+         * │   ├── 22
+         * │   ├── 22
+         * │   └── 21
+         * └── 29
+         */
         val tree = Group {
             55()
             Group {
@@ -163,6 +222,16 @@ class TestSuite() {
 
     @Test
     fun test09() {
+        /*
+         * *
+         * ├── 1
+         * ├── 2
+         * └── *
+         *     ├── 1
+         *     ├── 1
+         *     ├── 2
+         *     └── 0
+         */
         val tree = Group {
             1()
             2()
@@ -179,6 +248,18 @@ class TestSuite() {
 
     @Test
     fun test10() {
+        /*
+         * *
+         * └── *
+         *     └── *
+         *         └── *
+         *             └── *
+         *                 └── *
+         *                     └── *
+         *                         ├── 3
+         *                         ├── 9
+         *                         └── 8
+         */
         val tree = Group {
             Group {
                 Group {
@@ -202,6 +283,12 @@ class TestSuite() {
 
     @Test
     fun test11() {
+        /*
+         * *
+         * └── *
+         *     └── *
+         *         └── (empty)
+         */
         val tree = Group {
             Group {
                 Group { }
@@ -213,6 +300,18 @@ class TestSuite() {
 
     @Test
     fun test12() {
+        /*
+         * *
+         * ├── 1
+         * ├── 2
+         * ├── *
+         * │   ├── 1
+         * │   ├── 1
+         * │   ├── 2
+         * │   └── 0
+         * └── *
+         *     └── (empty)
+         */
         val tree = Group {
             1()
             2()
